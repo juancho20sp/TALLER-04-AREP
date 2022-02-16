@@ -1,6 +1,7 @@
 package spring;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,6 +63,19 @@ public class EciSpringBoot {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public String invokeService(String serviceName) {
+        Method serviceMethod = services.get(serviceName);
+        try {
+            return (String)serviceMethod.invoke(null);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        return "Service error";
     }
 
 }

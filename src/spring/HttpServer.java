@@ -49,7 +49,7 @@ public class HttpServer {
             }
 
             if (file.startsWith("/Apps/")) {
-                invokeService(file);
+                invokeService(file.substring(0, 4));
             }
 
             outputLine = "<!DOCTYPE html>"
@@ -71,8 +71,8 @@ public class HttpServer {
         serverSocket.close();
     }
 
-    private static void invokeService(String file) {
-
+    private static void invokeService(String service) {
+        EciSpringBoot.getInstance().invokeService(service);
     }
 
 //    public void start() {
